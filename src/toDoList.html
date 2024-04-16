@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="./output.css">
+    <style>
+       
+        ul li.checked {
+          text-decoration: line-through;
+        }
+        ul li.unchecked {
+          text-decoration: none;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-800 to-purple-900 w-[100%] h-screen ">
+    <div class="container mt-[100px] bg-white w-[50%] mx-auto p-10 rounded-2xl">
+        <h2 class="text-xl font-bold flex gap-2 text-center text-slate-800">To-Do List <img class="w-12 -mt-2" src="./To-Do-list/icon.png" alt=""></h2>
+        <div class="flex justify-center items-center mt-4 gap-2 mb-10">
+            <input class="inputField p-2 rounded w-[80%] outline-none bg-slate-200" type="text" placeholder="Add your text" spellcheck="false">
+            <button class="bg-orange-500 p-3 w-[20%] text-white  rounded-full add">Add</button>
+        </div>
+            
+        <ul class="li-container">
+             </ul>
+    </div>
+     
+
+
+
+    <script>
+        // Function to toggle the checked/unchecked status of list items
+        function toggleListItemStatus(item) {
+            item.classList.toggle('checked');
+            item.classList.toggle('unchecked');
+            const img = item.querySelector('img');
+            if (item.classList.contains('checked')) {
+                img.src = './To-Do-list/checked.png';
+            } else {
+                img.src = './To-Do-list/unchecked.png';
+            }
+        }
+    
+        // Function to add event listener to list items
+        function addListItemEventListener(item) {
+            item.addEventListener('click', () => {
+                toggleListItemStatus(item);
+            });
+        }
+    
+        // Function to add event listeners to all list items
+        function addListEventListeners() {
+            const liItems = document.querySelectorAll('.li-container li');
+            liItems.forEach((item) => {
+                addListItemEventListener(item);
+            });
+        }
+    
+        // Call the function when the page loads
+        addListEventListeners();
+    
+        const liContainer = document.querySelector('.li-container');
+        const add = document.querySelector('.add');
+        const inputField = document.querySelector('.inputField');
+    
+        function createListItem(text) {
+            let li = document.createElement('li');
+            li.className = 'unchecked flex mb-2 gap-2';
+            let img = document.createElement('img');
+            img.setAttribute('src', './To-Do-list/unchecked.png');
+            img.classList.add('w-5', 'h-5');
+            li.appendChild(img);
+            let span = document.createElement('span');
+            span.className = 'pb-[2px]';
+            span.textContent = text;
+            li.appendChild(span);
+    
+            // Create delete button
+            let deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.className = 'delete-btn w-12  text-center text-[7px] bg-red-500 p-1 text-white rounded-full -mt-[4]';
+            li.appendChild(deleteButton);
+    
+            return li;
+        }
+    
+        function addListItem(text) {
+            const li = createListItem(text);
+            liContainer.appendChild(li);
+            addListItemEventListener(li);
+    
+            // Clear the input field after adding the item
+            inputField.value = '';
+        }
+    
+        add.addEventListener('click', () => {
+            if (inputField.value.trim() !== '') {
+                addListItem(inputField.value.trim());
+            }
+        });
+    
+        // Event delegation for delete button
+        liContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('delete-btn')) {
+                const listItem = event.target.parentElement;
+                liContainer.removeChild(listItem);
+            }
+        });
+    </script>
+    </body>
+</html>
