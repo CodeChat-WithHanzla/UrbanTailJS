@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="./output.css">
+    <style>
+        ul li.checked {
+            text-decoration: line-through;
+        }
+        ul li.unchecked {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-800 to-purple-900 w-[100%] h-screen ">
+    <div class="container mt-[100px] bg-white w-[50%] mx-auto p-10 rounded-2xl">
+        <h2 class="text-xl font-bold flex gap-2 text-center text-slate-800">To-Do List <img class="w-12 -mt-2" src="./To-Do-list/icon.png" alt=""></h2>
+        <div class="flex justify-center items-center mt-4 gap-2 mb-10">
+            <input class="inputField p-2 rounded w-[80%] outline-none bg-slate-200" type="text" placeholder="Add your text" spellcheck="false">
+            <button type="button" class=" add bg-orange-500 p-3 w-[20%] text-white  rounded-full ">Add</button>
+        </div>
+        
+        <ul class="li-container">
+            <!-- <li class="unchecked flex mb-2 gap-2">
+                <img class="w-5 h-5" src="./To-Do-list/unchecked.png" alt="">
+                <span class="pb-[2px]">Text</span>
+                <button  class="delete-btn w-12 text-center text-[7px] bg-rose-500 p-1 text-white rounded-full -mt-[4]">Delete</button>
+            </li> -->
+        </ul>
+        
+    </div>
+
+
+    <script>
+        const liContainer=document.querySelector('.li-container')
+        const add=document.querySelector('.add')
+        const inputField=document.querySelector('.inputField')
+        add.addEventListener('click',()=>{
+            if(inputField.value.trim()!==''){
+                addListItem(inputField.value.trim())
+                console.log("add is clicked");
+            }
+        })
+        
+        function addListItem(text){
+        const li= createListItem(text)//create list item
+        liContainer.appendChild(li)
+        addListEventListener(li) //to send it to toggle function
+        inputField.value=''
+        saveData()
+        }
+
+        function createListItem(text) {
+         const li=document.createElement('li')
+         li.classList.add('unchecked', 'flex', 'mb-2', 'gap-2');
+         
+         const img=document.createElement('img')
+         img.classList.add('w-5','h-5')
+         img.setAttribute('src','./To-Do-list/unchecked.png')
+         li.appendChild(img)
+
+         const span=document.createElement('span')
+         span.classList.add('pb-[2px]')
+         span.textContent=text
+         li.appendChild(span)
+
+         const deleteButton=document.createElement('button')
+         deleteButton.classList.add('delete-btn','w-12', 'text-center','text-[7px]','bg-rose-500','p-1','text-white','rounded-full','-mt-[4]')
+         deleteButton.textContent='Delete'
+         li.appendChild(deleteButton)
+
+         return li
+ }
+      function addListEventListener(li) {
+        li.addEventListener('click',()=>{
+            toggleListItemStatus(li)
+        })
+      }
+     
+      function toggleListItemStatus(li){
+        li.classList.toggle('checked')
+        li.classList.toggle('unchecked')
+        const img=li.querySelector('img')
+        img.src=li.classList.contains('checked') ? './To-Do-list/checked.png' : './To-Do-list/unchecked.png';
+        saveData()
+      }
+  
+      liContainer.addEventListener('click',(event)=>{
+        if (event.target.classList.contains('delete-btn')) {
+        const li_item=event.target.parentElement
+        liContainer.removeChild(li_item)
+        saveData()    
+        }
+      })
+
+      function saveData() {
+        localStorage.setItem('data',liContainer.innerHTML)
+      }
+      function showData() {
+        liContainer.innerHTML= localStorage.getItem('data')
+      }
+      showData()
+    </script>
+</body>
+</html>
