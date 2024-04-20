@@ -4,35 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello-Calrom</title>
-    <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="./output.css">  
 </head>
-<body class="bg-[#fff] m-0 p-0 box-border">
+<body class="bg-[#fff] m-0 p-0 box-border w-screen">
     <!-- Header Starts Here -->
     <header class="w-screen h-auto text-[#1A1A1A] text-[14px] md:pl-[90px] md:pr-[90px] md:pt-[10px]  sticky top-0 shadow-md shadow-slate-600 flex justify-center items-center bg-transparent z-50" >
      <div class="hidden md:block md:w-[50%]">
       <ul class="flex justify-between items-center cursor-pointer ">
-        <li>Hello</li>
-        <li>Airline Software</li>
-        <li>Who we are</li>
-        <li><a href="#" title="img"><img src="https://www.calrom.com/wp-content/uploads/2019/05/Calrom_master-pos_rgb_150.png" alt=""></a></li>
-        <li>Careers</li>
-        <li>News and blogs</li>
-        <li>Get in touch</li>
+        <li class="hover:bg-[#f2f2f2] p-1">Hello</li>
+        <li class="hover:bg-[#f2f2f2] p-1">Airline Software</li>
+        <li class="hover:bg-[#f2f2f2] p-1">Who we are</li>
+        <li class="hover:bg-[#f2f2f2] "><a href="#" title="img"><img src="https://www.calrom.com/wp-content/uploads/2019/05/Calrom_master-pos_rgb_150.png" alt=""></a></li>
+        <li class="hover:bg-[#f2f2f2] p-1">Careers</li>
+        <li class="hover:bg-[#f2f2f2] p-1">News and blogs</li>
+        <li class="hover:bg-[#f2f2f2] p-1">Get in touch</li>
       </ul>
      </div>
 
-     <div class="md:hidden block mb-10 cursor-pointer">
-      <div class="flex mr-20 justify-around items-center ">
-        <a href="#" title="img" class="w-screen"><img  class="shrink-0 ml-7" src="https://www.calrom.com/wp-content/uploads/2019/05/Calrom_master-pos_rgb_150.png" alt=""></a>
-        <div class="text-4xl font-bold ">
-          <p>&#9776</p>
+     <div class="md:hidden block mb-10 cursor-pointer ">
+      <div class="flex  justify-evenly items-center gap-x-36">
+        <a href="#" title="img" class="w-[100%] "><img  class="shrink-0 " src="https://www.calrom.com/wp-content/uploads/2019/05/Calrom_master-pos_rgb_150.png" alt=""></a>
+        <div class="text-4xl font-bold content">
+          <div class="menu">
+            <svg  xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M120-240v-60h520v60H120Zm678-52L609-481l188-188 43 43-145 145 146 146-43 43ZM120-452v-60h400v60H120Zm0-208v-60h520v60H120Z"/></svg>
+          </div>
+          <!-- <ul class="flex h-[100%] ul-Menu justify-center items-start flex-col text-[14px] text-[#2d6a8d9d] ">
+            <li class="hover:bg-[#f2f2f2] p-2">Hello</li>
+            <li class="hover:bg-[#f2f2f2] p-2">AeroSoftware</li>
+            <li class="hover:bg-[#f2f2f2] p-2">Who we are</li>
+            <li class="hover:bg-[#f2f2f2] p-2">Careers</li>
+            <li class="hover:bg-[#f2f2f2] p-2">News and blogs</li>
+            <li class="hover:bg-[#f2f2f2] p-2">Get in touch</li>
+          </ul> -->
         </div>
       </div>
       
      </div>
     </header>
     <!-- Header Ends Here -->
-    <main class="text-[#676767] text-[16px] w-screen h-auto ">
+    <main class="text-[#676767] text-[16px] w-screen h-auto main-section">
       <div>
         <a href="#" title="image"><img class="w-screen h-auto shrink-0" src="https://www.calrom.com/wp-content/uploads/Calrom-website-banner-HOME.jpg" alt=""></a>
       </div>
@@ -207,6 +217,73 @@
   
 
     </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const content=document.querySelector('.content')
+        const menu = document.querySelector('.menu');
+        const main=document.querySelector('.main-section')
+
+        menu.addEventListener('click',()=>{
+          const ul=ulcreator()
+          content.appendChild(ul)
+          menu.remove()
+        })
+    
+        document.body.addEventListener('click', (event) => {
+    // Check if the click event does not originate from the menu
+    if (!menu.contains(event.target)) {
+        // Close the menu
+        const ul = document.querySelector('.ul-Menu');
+        if (ul) {
+            ul.remove();
+            content.appendChild(menu);
+        }
+    }
+});
+
+
+        function ulcreator(){
+          const ul=document.createElement('ul')
+        ul.classList='flex h-[100%] ul-Menu justify-center items-start flex-col text-[14px] text-[#2d6a8d9d] '
+
+        
+        const li1=document.createElement('li')
+        li1.classList='hover:bg-[#f2f2f2] p-2'
+        li1.textContent='Hello'
+        ul.appendChild(li1)
+
+        const li2=document.createElement('li')
+        li2.classList='hover:bg-[#f2f2f2] p-2'
+        li2.textContent='AeroSoftware'
+        ul.appendChild(li2)
+
+        const li3=document.createElement('li')
+        li3.classList='hover:bg-[#f2f2f2] p-2'
+        li3.textContent='Who are you'
+        ul.appendChild(li3)
+
+        const li4=document.createElement('li')
+        li4.classList='hover:bg-[#f2f2f2] p-2'
+        li4.textContent='Carrers'
+        ul.appendChild(li4)
+
+        const li5=document.createElement('li')
+        li5.classList='hover:bg-[#f2f2f2] p-2'
+        li5.textContent='News and Blogs'
+        ul.appendChild(li5)
+
+        const li6=document.createElement('li')
+        li6.classList='hover:bg-[#f2f2f2] p-2'
+        li6.textContent='Get in Touch'
+        ul.appendChild(li6)
+
+        return ul
+        }
+        
+      });
+    </script>
+    
 </body>
 
 </html>
