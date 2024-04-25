@@ -1,2 +1,3 @@
 # UrbanTailJS
-Your gateway to stylish web development. Harness JavaScript and Tailwind CSS for sleek, modern interfaces.
+Elevate your JavaScript projects (beginners) with Tailwind CSS for streamlined styling. Ensure Tailwind CSS is installed on your system for seamless replication of code
+
