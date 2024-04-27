@@ -930,6 +930,10 @@ video {
   cursor: pointer;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -1591,6 +1595,10 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.hover\:pointer-events-none:hover {
+  pointer-events: none;
+}
+
 .hover\:-translate-y-1:hover {
   --tw-translate-y: -0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1646,6 +1654,10 @@ video {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.focus\:cursor-not-allowed:focus {
+  cursor: not-allowed;
 }
 
 @media (min-width: 768px) {
