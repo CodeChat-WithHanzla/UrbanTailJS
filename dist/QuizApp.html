@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#001e4d]">
+    <div class="app bg-white w-[90%] max-w-[600px] mt-[100px] mx-auto mb-0 rounded-xl p-[30px]">
+    <h1 class="text-[25px] text-[#001e4d] font-bold border-b border-solid border-[#333] p-[30px]">Simple Quiz</h1>
+    <div class="quiz pt-[20px] py-5"></div>
+    <h2 class="question text-[18px] text-[#001e4d] font-bold">Question goes here</h2>
+    <div class="ans-btn">
+        <button class="btn bg-white text-[#222] font-[500] w-[100%] border border-solid border-[#222] mt-3 text-left rounded-[4px] p-[10px] transition duration-300 hover:bg-[#222] hover:text-white">Answer 1</button>
+        <button class="btn bg-white text-[#222] font-[500] w-[100%] border border-solid border-[#222] mt-3 text-left rounded-[4px] p-[10px] transition duration-300 hover:bg-[#222] hover:text-white">Answer 2</button>
+        <button class="btn bg-white text-[#222] font-[500] w-[100%] border border-solid border-[#222] mt-3 text-left rounded-[4px] p-[10px] transition duration-300 hover:bg-[#222] hover:text-white">Answer 3</button>
+        <button class="btn bg-white text-[#222] font-[500] w-[100%] border border-solid border-[#222] mt-3 text-left rounded-[4px] p-[10px] transition duration-300 hover:bg-[#222] hover:text-white">Answer 4</button>
+    </div>
+    <button class="next-btn text-white font-[500] w-[150px] rounded-[4px] p-3 mx-auto mt-5   transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 hidden">
+        Next
+      </button>
+    </div>
+
+    <script>
+        const questions=[
+            {
+                question:"Which is the largest animal in the world?",
+                answers:[
+                    {text:'Shark',correct:false},
+                    {text:'Blue Whale',correct:true},
+                    {text:'Elephant',correct:false},
+                    {text:'Giraffe',correct:false}
+                ]
+                
+            },
+            {
+                question:"Which of the following is the largest ocean in the world?",
+                answers:[
+                    {text:' Atlantic Ocean',correct:false},
+                    {text:'Indian Ocean',correct:true},
+                    {text:'Pacific Ocean',correct:true},
+                    {text:'Arctic Ocean',correct:false}
+                ]
+                
+            },
+            {
+                question:"Which is the largest desert in the world?",
+                answers:[
+                    {text:'Kalahari',correct:false},
+                    {text:'Gobi',correct:true},
+                    {text:'Sahara',correct:false},
+                    {text:'Antarctica',correct:true}
+                ]
+                
+            },
+            {
+                question:"Which is the smallest continent in the world?",
+                answers:[
+                    {text:'Asia',correct:false},
+                    {text:'Australia',correct:true},
+                    {text:'Arctic',correct:false},
+                    {text:'Africa',correct:false}
+                ]
+                
+            }
+        ];
+
+        const questionElement = document.querySelector('.question')
+        const answerButton=document.querySelector('.ans-btn')
+        const nextButton=document.querySelector('.next-btn')
+
+        let currentQuestionIndex=0
+        let score=0
+
+        function startQuiz() {
+            currentQuestionIndex=0
+            score=0 
+            nextButton.innerHTML='Next'
+            showQuestion()
+        }
+
+        function showQuestion() {
+        resetState()
+        let currentQuestion= questions[currentQuestionIndex]  
+        let questionNo= currentQuestionIndex + 1
+        questionElement.innerHTML=questionNo + '. '+ currentQuestion.question
+
+        currentQuestion.answers.forEach(answer=>{
+            const button=document.createElement('button')
+            button.innerHTML=answer.text
+            button.classList='btn bg-white text-[#222] font-[500] w-[100%] border border-solid border-[#222] mt-3 text-left rounded-[4px] p-[10px] transition duration-300 hover:bg-[#222] hover:text-white'
+            answerButton.appendChild(button)
+        })
+        }
+
+        function  resetState(){
+           nextButton.style.display='none'
+           while(answerButton.firstChild){
+            answerButton.removeChild(answerButton.firstChild)
+           } 
+        }
+        startQuiz()
+    </script>
+</body>
+</html>

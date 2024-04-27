@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qr Generator</title>
+    <style>
+        .transition-width {
+  transition-property: width;
+}
+
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950">
+    <div class="flex w-screen h-screen justify-center items-center">
+        <div class="field bg-white text-black p-16 leading-10 rounded-lg">
+            <p class="text-xl">Enter Text/Url</p>
+            <input class="input outline-0 border-0 " type="text" spellcheck="false" placeholder="Text/Url">
+            <button class="btn rounded text-white bg-blue-800 hover:bg-purple-900 hover:scale-90 p-3">Generate Qr</button>
+            <img src="" alt="" class="w-0 qr-img transition-width delay-1000 duration-300
+             mt-11">
+             <p class="empty"></p>
+        </div>
+    </div>
+
+    <script>
+        const input=document.querySelector('.input')
+        const qrImg=document.querySelector('.qr-img')
+        const btn=document.querySelector('.btn')
+        const empty=document.querySelector('.empty')
+        const qrApi='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='
+        btn.addEventListener('click',()=>{
+            if(input.value!==''){
+            qrImg.src=qrApi+input.value
+            qrImg.classList.remove('w-0')
+            qrImg.classList.add('w-44')
+            empty.innerHTML=''
+            }
+            else{
+                empty.innerHTML='Enter Any text or Url'
+
+            }
+
+        })
+    </script>
+</body>
+</html>
