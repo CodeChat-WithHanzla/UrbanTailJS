@@ -588,6 +588,10 @@ video {
   }
 }
 
+.absolute {
+  position: absolute;
+}
+
 .sticky {
   position: sticky;
 }
@@ -1204,6 +1208,11 @@ video {
 .bg-slate-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+}
+
+.bg-\[yellowgreen\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(154 205 50 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-br {

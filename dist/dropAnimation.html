@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop Animation Project</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .drop{
+            position: absolute;
+            height: 5rem;
+            width: 5rem;
+            background: #a72295;
+            border: 4px solid rgba(28, 82, 92, 0.452);
+            animation: animate 5s linear;
+            border-radius: 5%;
+            transition: all 0.5s ease-in-out;
+        }
+        @keyframes animate {
+            0%{
+                opacity: 1;
+                transform: scale(2);
+            }
+            25%{
+                border-radius: 25%;
+                
+            }
+            50%{
+                opacity: 0.5;
+                transform: scale(3);
+                background: #b845c7;
+            }
+            100%{
+                opacity: 1;
+                transform: scale(4);
+                border-radius: 50%;
+                background: #073d69;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[yellowgreen] overflow-hidden">
+    <div class="container"></div>
+</body>
+<script>
+    const container=document.querySelector('.container')
+    setInterval(dropfunction,500)
+    function dropfunction(){
+        const span=document.createElement('span')
+        span.classList.add('drop')
+        span.style.top=Math.random()*innerHeight +"px"
+        span.style.left=Math.random()*innerWidth +"px"
+
+        setTimeout(()=>{
+            span.remove()
+        },3500)
+        container.appendChild(span)
+    }
+    </script>
+</html>
