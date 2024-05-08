@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key code generater</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-900 flex min-h-screen justify-center items-center">
+  <div class="container bg-purple-900 max-w-72 p-7 border-2 border-purple-600 rounded backdrop-blur-lg">
+    <div class="key-container text-white ">
+        <div class="border border-y-white px-5 py-2 flex flex-col justify-center items-center mb-2">
+        <p>Key</p>
+        <p class="key">-</p>
+        </div>
+
+        <div class="border border-y-white px-5 py-2 flex  flex-col justify-center items-center mb-2">
+          <p>KeyCode</p>
+          <p class="keyCode">-</p>
+          </div>
+
+          <div class="border border-y-white px-5 py-2 flex  flex-col justify-center items-center mb-2">
+            <p>Unicode</p>
+            <p class="Unicode">-</p>
+            </div>
+  
+      
+    </div>
+  </div>    
+</body>
+<script>
+const key     = document.querySelector('.key')
+const keyCode = document.querySelector('.keyCode')
+const Unicode = document.querySelector('.Unicode')
+
+window.addEventListener('keydown',(e)=>{
+  if(e.key==='F5'){
+    e.preventDefault()
+  }
+  key.innerHTML=e.key===' '? "Space": e.key
+  keyCode.innerHTML=e.code
+  Unicode.innerHTML=e.key.charCodeAt(0)
+})
+</script>
+</html>
