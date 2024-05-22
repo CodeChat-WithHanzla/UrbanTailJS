@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Stickers </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-r from-violet-500 to-fuchsia-500 w-screen h-screen text-white overflow-hidden flex justify-center items-center">
+    <template>
+    <div class="container w-[300px] h-[200px] rounded-[20px] border-[5px] border-solid border-[#4a90e2] ">
+    
+    <div class="heading h-[70px] text-white text-center p-2">
+        <div class="text font-[900] text-[35px] leading-8">Hii</div>
+        <div class="subtext font-[700] text-[16px] leading-8">My name is</div>
+    </div>
+
+    <div class="name h-[100px] bg-white text-[45px] text-center overflow-hidden max-w-[300px] transition delay-300 ease-in-out text-slate-800"></div>
+    <div class="bottom"></div>
+    </div> 
+
+</template>
+
+    <div class="wrapper text-center"></div>
+
+  <script>
+    let wrapper = document.getElementsByClassName('wrapper')[0]
+    let template = document.getElementsByTagName('template')[0]
+    let names  = ["Hanzla","Huzaifa","Khuzaima"]
+    let colors = ['#EF5FBE', '#123524', '#F93F0B', '#78184a', '#50c878', '#2e1d74', '#8c1c1c', '#a6c3e3', '#78184a'];
+
+    let stickers=function(name){
+        let div = template.content.querySelector('div')
+        let nameOfSticker = div.querySelector('.name') 
+        nameOfSticker.innerHTML = name
+
+        div.style.background=colors[Math.floor(Math.random()*colors.length)]
+        
+        div.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+        let node = document.importNode(div,true)
+        wrapper.appendChild(node)
+    }
+
+    setTimeout(() => {
+       location.reload() 
+    },1000);
+    names.forEach(stickers)
+
+  </script>
+</body>
+</html>
