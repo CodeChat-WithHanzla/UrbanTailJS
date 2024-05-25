@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Quote Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        *{
+            font-family: "Playfair Display", serif;
+        }
+        .quoteBox h2::after{
+         content: '';
+         width: 35px;
+         height: 3px;
+         border-radius: 3px;
+         background: rgb(23, 124, 299);
+         position: absolute;
+         bottom: -10px;
+         left: 50%;
+         transform: translateX(-50%);
+        }
+        .quoteBox blockquote{
+            font-size: 28px;
+            min-height: 110px;
+        }
+        .quoteBox blockquote::before,.quoteBox blockquote::after{
+            content: '"';
+        }
+        .quoteBox span::before{
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: rgb(23,124,229);
+            position: absolute;
+            top: 50%;
+            left: -30px;
+        }
+        .quoteBox button{
+            background: rgb(23,124,229);
+            color: #fff;
+            border-radius: 25px;
+            border: 1px solid rgb(23,124,229);
+            width: 150px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .quoteBox button img{
+            width: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        .quoteBox button:nth-child(2){
+            background: transparent;
+            color: #333;
+        }
+    </style>
+</head>
+<body class="bg-[#bbc6fa]">
+    <div class="quoteBox bg-white w-[700px] absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] p-[40px] rounded-[10px] text-center" style="box-shadow:0px 10px 20px 0px rgba(0,0,0,0.15) ;">
+        <h2 class="text-[32px] mb-[40px] relative">Quote of the Day</h2>
+        <blockquote id="quote">Loading...</blockquote>
+        <span class="block mt-3 float-right relative " id="author">Loading...</span>
+        <div class="w-full mt-[50px] flex justify-center">
+            <button id="newQuote">New Quote</button>
+            <button id="tweet"><img src="./images/whatsapplogo.png" alt="">WhatsApp</button>
+        </div>
+    </div>
+
+
+    <script>
+        const quote = document.getElementById('quote')
+        const author = document.getElementById('author')
+        const newQuote = document.getElementById('newQuote')
+        const tweet = document.getElementById('tweet')
+        const api_url='https://api.quotable.io/random'
+        async function getQuote(url){
+         const response = await fetch(url)
+         const data = await response.json()
+         console.log(data);
+         quote.innerHTML = data.content
+         author.innerHTML = data.author
+        }
+        getQuote(api_url)
+        newQuote.addEventListener('click',()=>{
+            getQuote(api_url)   
+        })
+
+        function whatsapp(){
+            window.open('whatsapp://send?text=' + quote.innerHTML + '----by '+ author.innerHTML)
+        }
+        tweet.addEventListener('click',whatsapp)
+
+    </script>
+</body>
+</html>
