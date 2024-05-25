@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator form input{
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1),5px 5px 15px rgba(0,0,0,0.2);
+            background: transparent;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .calculator form .firstRow,.calculator form .lastCol {
+            color: #33ff48;
+        }
+    </style>
+</head>
+<body>
+    <div class="content bg-sky-700 w-screen h-screen flex justify-center items-center">
+        <div class="calculator bg-[#3a4452] rounded-[10px] p-5">
+            <form>
+                <div class="flex justify-end my-[20px] mx-0 text-white">
+                    <input type="text" name="display" class="display outline-none text-right flex-1 overflow-x-auto" style="box-shadow: none;font-size: 60px;">
+                </div>
+                <div>
+                    <input type="button" value="AC"  class="firstRow">
+                    <input type="button" value="DE"  class="firstRow">
+                    <input type="button" value="."  class="firstRow">
+                    <input type="button" value="/" class="firstRow">
+                </div>
+                <div>
+                    <input type="button" value="7">
+                    <input type="button" value="8">
+                    <input type="button" value="9">
+                    <input type="button" value="*" class="lastCol">
+                </div>
+                <div>
+                    <input type="button" value="4">
+                    <input type="button" value="5">
+                    <input type="button" value="6">
+                    <input type="button" value="-"class="lastCol">
+                </div>
+                <div>
+                    <input type="button" value="1">
+                    <input type="button" value="2">
+                    <input type="button" value="3">
+                    <input type="button" value="+"class="lastCol">
+                </div>
+                <div>
+                    <input type="button" value="00">
+                    <input type="button" value="0">
+                    <input type="button" value="=" class="lastCol">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const display = document.querySelector("input[name='display']")
+        const buttons = document.querySelectorAll(".calculator form input[type='button']")
+        buttons.forEach(button=>{
+            button.addEventListener('click',()=>{
+                const value = button.value
+                if(value==='AC'){
+                    display.value=''
+                }
+                else if(value==='DE'){
+                    display.value=display.value.toString().slice(0,-1)
+                }
+                else if (value==='='){
+                    try {
+                        let result = eval(display.value);
+                        display.value = Number(result.toFixed(5));
+                    } catch {
+                        display.value='Error'
+                    }
+                }
+                else{
+                    display.value+=value
+                }
+            })
+        })
+    </script>
+</body>
+</html>

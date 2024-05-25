@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Flip Application</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #coin {
+            transform-style: preserve-3d;
+            transition: transform 3s;
+        }
+        #coin div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid black;
+            border-radius: 50%;
+        }
+        .headsclass {
+            background-image: url('https://cdn.pixabay.com/photo/2019/04/15/20/42/bitcoin-4130299_1280.png');
+        }
+        .tailsclass {
+            background-image: url('https://cdn.pixabay.com/photo/2016/03/31/15/03/phoenix-1292958_640.png');
+            transform: rotateY(-180deg);
+        }
+        .flip-heads {
+            animation: flipheads 3s;
+            animation-fill-mode: forwards;
+        }
+        .flip-tails {
+            animation: fliptails 3s;
+            animation-fill-mode: forwards;
+        }
+        @keyframes flipheads {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(1620deg);
+            }
+        }
+        @keyframes fliptails {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(1800deg);
+            }
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex justify-center items-center bg-gradient-to-r from-[#F2709C] to-[#FF9472]">
+    <div class="container flex flex-col items-center justify-center">
+        <div id="coin" class="relative w-[15rem] h-[15rem] my-[2rem] mx-0">
+            <div class="headsclass w-full h-full"></div>
+            <div class="tailsclass w-full h-full"></div>
+        </div>
+        <div>
+            <button id="flip" class="mb-6 text-4xl text-white p-[1rem] bg-blue-800 rounded">Flip The Coin</button>
+            <p class="text-2xl text-white">Heads: <span id="headscount"> 0 </span> || Tails: <span id="tailscount"> 0 </span></p>
+            <p class="text-center mt-10"><span id="status" class="text-4xl text-white"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const coin = document.querySelector('#coin');
+const button = document.querySelector('#flip');
+const status = document.querySelector('#status');
+const heads = document.querySelector('#headscount');
+const tails = document.querySelector('#tailscount');
+
+let headscount = 0;
+let tailscount = 0;
+
+function processResult(result) {
+    if (result === 'heads') {
+        headscount++;
+        coin.classList.add('flip-tails');
+        setTimeout(() => {
+            coin.classList.remove('flip-tails');
+            heads.innerHTML = headscount;
+            status.innerHTML = result.toUpperCase();
+        }, 3000);
+    } else {
+        tailscount++;
+        coin.classList.add('flip-heads');
+        setTimeout(() => {
+            coin.classList.remove('flip-heads');
+            tails.innerHTML = tailscount;
+            status.innerHTML = result.toUpperCase();
+        }, 3000);
+    }
+}
+
+function flipCoin() {
+    const random = Math.random();
+    const result = random < 0.5 ? 'heads' : 'tails';
+
+    coin.classList.remove('flip-heads', 'flip-tails');
+
+    setTimeout(() => {
+        processResult(result);
+    }, 1000);
+}
+
+button.addEventListener('click', flipCoin);
+    </script>
+</body>
+</html>
